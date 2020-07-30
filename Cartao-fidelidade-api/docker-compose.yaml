@@ -1,0 +1,23 @@
+version: "3"
+services:
+    cartaofidelidade:
+        build: .
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+        networks:
+            - cartaof-network
+    db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "Sqlrootp@ss1"
+            ACCEPT_EULA: "Y"
+        networks:
+            - cartaof-network
+        ports:
+            - "1435:1433"
+            
+networks: 
+    cartaof-network:
+        driver: bridge
